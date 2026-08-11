@@ -1,9 +1,12 @@
-namespace CSharpWebApi.Models;
+using System;
 
-public sealed class WeatherForecast
+namespace CSharpWebApi.Models
 {
-    public DateOnly Date { get; init; }
-    public int TemperatureC { get; init; }
-    public string? Summary { get; init; }
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public sealed class WeatherForecast
+    {
+        public DateTime Date { get; set; }
+        public int TemperatureC { get; set; }
+        public string Summary { get; set; }
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
 }

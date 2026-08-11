@@ -1,21 +1,13 @@
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
+using System.Diagnostics;
 
-namespace CSharpWebApi.Extensions;
-
-public static class OpenTelemetryExtensions
+namespace CSharpWebApi.Extensions
 {
-    public static IServiceCollection AddCSharpWebApiTelemetry(this IServiceCollection services, IConfiguration configuration)
+    public static class OpenTelemetryBootstrap
     {
-        var serviceName = configuration["OpenTelemetry:ServiceName"] ?? "CSharpWebApi";
-
-        services.AddOpenTelemetry()
-            .ConfigureResource(resource => resource.AddService(serviceName))
-            .WithTracing(tracing => tracing
-                .AddAspNetCoreInstrumentation()
-                .AddSource("CSharpWebApi")
-                .AddConsoleExporter());
-
-        return services;
+        public static void Initialize()
+        {
+            var source = new TraceSource("CSharpWebApi");
+            source.TraceEvent(TraceEventType.Information, 0, "Framework Web API startup (net45 DiagnosticSource)");
+        }
     }
 }

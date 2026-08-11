@@ -1,31 +1,37 @@
+using System.Web.Http;
 using CSharpWebApi.Extensions;
-using CSharpWebApi.Services;
+using Microsoft.Owin.Hosting;
+using Owin;
 
-var builder = WebApplication.CreateBuilder(args);
+[assembly: Microsoft.Owin.OwinStartup(typeof(CSharpWebApi.Startup))]
 
-builder.Services.AddControllers();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddCSharpWebApiTelemetry(builder.Configuration);
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+namespace CSharpWebApi
 {
-    options.SwaggerDoc("v1", new() { Title = "CSharp Web API", Version = "v1" });
-});
+    public static class Program
+    {
+        public static void Main()
+        {
+            OpenTelemetryBootstrap.Initialize();
+            using (WebApp.Start<Startup>("http://localhost:5080/"))
+            {
+                System.Console.WriteLine("CSharp Web API running on http://localhost:5080/ (net45)");
+                System.Console.WriteLine("Press Enter to exit.");
+                System.Console.ReadLine();
+            }
+        }
+    }
 
-var app = builder.Build();
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
+            app.UseWebApi(config);
+        }
+    }
 }
-
-app.MapGet("/health", () => Results.Ok(new { status = "healthy", framework = "net6.0" }))
-    .WithName("HealthCheck")
-    .WithTags("Health");
-
-app.Run();
-
-public partial class Program { }

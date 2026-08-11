@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <Target Name="RunToolIntegration" AfterTargets="Build" Condition="'$(MSBuildProjectName)' == 'CSharpWebApi.Tools'">
-    <Message Importance="high" Text="=== Tool integration for net6.0 ===" />
+    <Message Importance="high" Text="=== Tool integration for net45 ===" />
 
     <Message Importance="high" Text="[AltCover] Package: tests/CSharpWebApi.Tests.csproj -> altcover" />
     <Message Importance="high" Text="[Coverlet] Package: tests/CSharpWebApi.Tests.csproj -> coverlet.collector" />

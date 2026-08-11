@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>10</LangVersion>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>net45</TargetFramework>
+    <LangVersion>6</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
     <IsPackable>false</IsPackable>
     <OutputType>Library</OutputType>
     <RootNamespace>CSharpWebApi.Tools</RootNamespace>
@@ -19,7 +19,7 @@
     <None Include="..\NuGet-Audit\**\*" Link="NuGet-Audit\%(RecursiveDir)%(Filename)%(Extension)" />
     <None Include="..\OpenTelemetry\**\*" Link="OpenTelemetry\%(RecursiveDir)%(Filename)%(Extension)" />
     <None Include="..\Roslyn\**\*" Link="Roslyn\%(RecursiveDir)%(Filename)%(Extension)" />
-    <None Include="..\Semgrep\**\*" Link="Semgrep\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\semgrep\**\*" Link="semgrep\%(RecursiveDir)%(Filename)%(Extension)" />
     <None Include="..\Stryker.NET\**\*" Link="Stryker.NET\%(RecursiveDir)%(Filename)%(Extension)" />
     <None Include="..\jscpd\**\*" Link="jscpd\%(RecursiveDir)%(Filename)%(Extension)" />
     <None Include="..\lizard\**\*" Link="lizard\%(RecursiveDir)%(Filename)%(Extension)" />
