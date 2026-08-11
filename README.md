@@ -26,9 +26,17 @@ ASP.NET Core Web API monolithic project for **net10** branch targeting **net10.0
 ## Build
 
 ```bash
-dotnet restore
-dotnet build
-dotnet test
+dotnet restore CSharpWebApi.sln
+dotnet build CSharpWebApi.sln
+dotnet test CSharpWebApi.sln
+dotnet msbuild tools/CSharpWebApi.Tools/CSharpWebApi.Tools.csproj -t:RunCoverlet
+dotnet msbuild tools/CSharpWebApi.Tools/CSharpWebApi.Tools.csproj -t:RunAltCover
+```
+
+Fast build (compile only):
+
+```bash
+dotnet build CSharpWebApi.sln
 ```
 
 ## Run
@@ -37,18 +45,26 @@ dotnet test
 dotnet run --project src/CSharpWebApi/CSharpWebApi.csproj
 ```
 
+## Solution projects
+
+| Project | Path | Role |
+|---------|------|------|
+| CSharpWebApi | `src/CSharpWebApi/` | ASP.NET Core Web API |
+| CSharpWebApi.Tests | `tests/CSharpWebApi.Tests/` | xUnit tests (Coverlet, AltCover) |
+| CSharpWebApi.Tools | `tools/CSharpWebApi.Tools/` | Tool integration (references Web API + tests) |
+
 ## Tool entry points
 
-| Tool | Location |
-|------|----------|
-| AltCover | `tools/AltCover/run_altcover.sh` |
-| Coverlet | `tools/Coverlet/run_coverlet.sh` |
-| NuGet-Audit | `tools/NuGet-Audit/run_nuget_audit.sh` |
-| OpenTelemetry | configured in `src/CSharpWebApi/Extensions/OpenTelemetryExtensions.cs` |
-| Roslyn | `.editorconfig` + `src/CSharpWebApi/Analysis/LintViolations.cs` |
-| Semgrep | `tools/semgrep/run_semgrep.sh` |
-| Stryker.NET | `tools/stryker-config.json` |
-| jscpd | `tools/jscpd/.jscpd.json` |
-| lizard | `tools/lizard/run_lizard.sh` |
+| Tool | Connection |
+|------|------------|
+| AltCover | NuGet in tests csproj + `tools/AltCover/` + ToolIntegration.targets |
+| Coverlet | NuGet in tests csproj + `tools/Coverlet/` + ToolIntegration.targets |
+| NuGet-Audit | `Directory.Build.props` NuGetAudit=true |
+| OpenTelemetry | `src/CSharpWebApi/Extensions/OpenTelemetryExtensions.cs` |
+| Roslyn | `.editorconfig` + analyzers during compile |
+| Semgrep | `src/CSharpWebApi/Analysis/SastFixture.cs` + `tools/Semgrep/` |
+| Stryker.NET | `tools/Stryker.NET/stryker-config.json` -> Services |
+| jscpd | `tools/jscpd/.jscpd.json` -> Services |
+| lizard | `src/CSharpWebApi/Analysis/ComplexitySample.cs` + `tools/lizard/` |
 | pydriller | `tools/pydriller/run_pydriller.py` |
-| roslyn-sast | `tools/roslyn-sast/.globalconfig` + `src/CSharpWebApi/Analysis/SastFixture.cs` |
+| roslyn-sast | `tools/roslyn-sast/.globalconfig` in GlobalAnalyzerConfigFiles |

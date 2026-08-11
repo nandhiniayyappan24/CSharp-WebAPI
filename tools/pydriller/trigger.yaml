@@ -1,0 +1,7 @@
+tool: pydriller
+language: csharp
+target_framework: "net10.0"
+project: ../../src/CSharpWebApi/CSharpWebApi.csproj
+tests: ../../tests/CSharpWebApi.Tests/CSharpWebApi.Tests.csproj
+tools_project: ../CSharpWebApi.Tools/CSharpWebApi.Tools.csproj
+script: run_pydriller.py
