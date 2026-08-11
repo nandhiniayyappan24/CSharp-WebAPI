@@ -5,5 +5,11 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <NuGetAudit>true</NuGetAudit>
     <NuGetAuditLevel>low</NuGetAuditLevel>
+    <WebApiProject>$(MSBuildThisFileDirectory)src\CSharpWebApi\CSharpWebApi.csproj</WebApiProject>
+    <TestProject>$(MSBuildThisFileDirectory)tests\CSharpWebApi.Tests\CSharpWebApi.Tests.csproj</TestProject>
+    <ToolsProject>$(MSBuildThisFileDirectory)tools\CSharpWebApi.Tools\CSharpWebApi.Tools.csproj</ToolsProject>
   </PropertyGroup>
+  <ItemGroup>
+    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)tools\roslyn-sast\.globalconfig" />
+  </ItemGroup>
 </Project>
