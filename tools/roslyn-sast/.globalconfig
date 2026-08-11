@@ -1,0 +1,7 @@
+is_global = true
+
+dotnet_diagnostic.CA5350.severity = error
+dotnet_diagnostic.CA5379.severity = error
+dotnet_diagnostic.CA5397.severity = error
+dotnet_diagnostic.CA3001.severity = error
+dotnet_diagnostic.CA5390.severity = error
