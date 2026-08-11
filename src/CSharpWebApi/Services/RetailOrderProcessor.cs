@@ -1,14 +1,17 @@
-namespace CSharpWebApi.Services;
+using System;
 
-public static class RetailOrderProcessor
+namespace CSharpWebApi.Services
 {
-    public static decimal ProcessOrder(int quantity, decimal unitPrice, decimal discountPct)
+    public static class RetailOrderProcessor
     {
-        if (quantity <= 0) throw new ArgumentException("quantity must be positive");
-        var subtotal = quantity * unitPrice;
-        var discount = subtotal * (discountPct / 100m);
-        var total = subtotal - discount;
-        var tax = total * 0.08m;
-        return total + tax;
+        public static decimal ProcessOrder(int quantity, decimal unitPrice, decimal discountPct)
+        {
+            if (quantity <= 0) throw new ArgumentException("quantity must be positive");
+            var subtotal = quantity * unitPrice;
+            var discount = subtotal * (discountPct / 100m);
+            var total = subtotal - discount;
+            var tax = total * 0.08m;
+            return total + tax;
+        }
     }
 }

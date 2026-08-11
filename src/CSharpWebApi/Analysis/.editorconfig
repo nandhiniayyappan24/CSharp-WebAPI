@@ -1,4 +1,3 @@
-# SAST fixture code is scanned by Semgrep/roslyn-sast tools; suppress compile-time blocking.
 root = false
 
 [*.cs]

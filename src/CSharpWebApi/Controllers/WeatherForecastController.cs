@@ -1,25 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Web.Http;
 using CSharpWebApi.Models;
-using Microsoft.AspNetCore.Mvc;
 
-namespace CSharpWebApi.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public sealed class WeatherForecastController : ControllerBase
+namespace CSharpWebApi.Controllers
 {
-    private static readonly string[] Summaries = new[]
+    [RoutePrefix("api/weatherforecast")]
+    public sealed class WeatherForecastController : ApiController
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
-    {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        private static readonly string[] Summaries =
         {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        });
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
+
+        [HttpGet]
+        [Route("")]
+        public IEnumerable<WeatherForecast> Get()
+        {
+            var rng = new Random();
+            var results = new List<WeatherForecast>();
+            for (var index = 1; index <= 5; index++)
+            {
+                results.Add(new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(index),
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                });
+            }
+            return results;
+        }
     }
 }

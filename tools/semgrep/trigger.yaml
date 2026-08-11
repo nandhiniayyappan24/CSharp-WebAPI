@@ -1,7 +1,6 @@
 tool: Semgrep
 language: csharp
-target_framework: "net6.0"
+target_framework: "net48"
 project: ../../src/CSharpWebApi/CSharpWebApi.csproj
 tests: ../../tests/CSharpWebApi.Tests/CSharpWebApi.Tests.csproj
 tools_project: ../CSharpWebApi.Tools/CSharpWebApi.Tools.csproj
-target_files: [../../src/CSharpWebApi/Analysis/SastFixture.cs]
