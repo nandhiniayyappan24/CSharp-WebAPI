@@ -1,7 +1,8 @@
-namespace CSharpWebApi.Services;
-
-public interface IOrderService
+namespace CSharpWebApi.Services
 {
-    decimal CalculateTotal(int quantity, decimal unitPrice, decimal discountPct);
-    bool IsEligibleForFreeShipping(decimal orderTotal);
+    public interface IOrderService
+    {
+        decimal CalculateTotal(int quantity, decimal unitPrice, decimal discountPct);
+        bool IsEligibleForFreeShipping(decimal orderTotal);
+    }
 }

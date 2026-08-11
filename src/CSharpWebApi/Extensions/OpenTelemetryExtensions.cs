@@ -1,21 +1,24 @@
-using OpenTelemetry.Resources;
+using OpenTelemetry;
 using OpenTelemetry.Trace;
 
-namespace CSharpWebApi.Extensions;
-
-public static class OpenTelemetryExtensions
+namespace CSharpWebApi.Extensions
 {
-    public static IServiceCollection AddCSharpWebApiTelemetry(this IServiceCollection services, IConfiguration configuration)
+    public static class OpenTelemetryBootstrap
     {
-        var serviceName = configuration["OpenTelemetry:ServiceName"] ?? "CSharpWebApi";
+        private static TracerProvider _provider;
 
-        services.AddOpenTelemetry()
-            .ConfigureResource(resource => resource.AddService(serviceName))
-            .WithTracing(tracing => tracing
-                .AddAspNetCoreInstrumentation()
+        public static void Initialize()
+        {
+            _provider = Sdk.CreateTracerProviderBuilder()
                 .AddSource("CSharpWebApi")
-                .AddConsoleExporter());
+                .AddConsoleExporter()
+                .Build();
 
-        return services;
+            var source = new System.Diagnostics.ActivitySource("CSharpWebApi");
+            using (var activity = source.StartActivity("FrameworkWebApiStartup"))
+            {
+                activity?.SetTag("host.type", "owin");
+            }
+        }
     }
 }

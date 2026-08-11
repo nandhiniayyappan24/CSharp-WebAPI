@@ -1,15 +1,16 @@
 using System.Data.SqlClient;
 
-namespace CSharpWebApi.Analysis;
-
-public sealed class SastFixture
+namespace CSharpWebApi.Analysis
 {
-    private const string AdminPassword = "admin123";
-
-    public void GetUser(SqlConnection conn, string username)
+    public sealed class SastFixture
     {
-        var query = "SELECT * FROM Users WHERE Username = '" + username + "'";
-        var cmd = new SqlCommand(query, conn);
-        cmd.ExecuteReader();
+        private const string AdminPassword = "admin123";
+
+        public void GetUser(SqlConnection conn, string username)
+        {
+            var query = "SELECT * FROM Users WHERE Username = '" + username + "'";
+            var cmd = new SqlCommand(query, conn);
+            cmd.ExecuteReader();
+        }
     }
 }

@@ -1,18 +1,18 @@
-namespace CSharpWebApi.Services;
+using System;
 
-public sealed class OrderService : IOrderService
+namespace CSharpWebApi.Services
 {
-    public decimal CalculateTotal(int quantity, decimal unitPrice, decimal discountPct)
+    public sealed class OrderService : IOrderService
     {
-        if (quantity <= 0)
+        public decimal CalculateTotal(int quantity, decimal unitPrice, decimal discountPct)
         {
-            throw new ArgumentException("Quantity must be positive.", nameof(quantity));
+            if (quantity <= 0)
+                throw new ArgumentException("Quantity must be positive.", nameof(quantity));
+            var subtotal = quantity * unitPrice;
+            var discount = subtotal * (discountPct / 100m);
+            return subtotal - discount;
         }
 
-        var subtotal = quantity * unitPrice;
-        var discount = subtotal * (discountPct / 100m);
-        return subtotal - discount;
+        public bool IsEligibleForFreeShipping(decimal orderTotal) => orderTotal >= 50m;
     }
-
-    public bool IsEligibleForFreeShipping(decimal orderTotal) => orderTotal >= 50m;
 }
