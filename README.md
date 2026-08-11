@@ -1,6 +1,6 @@
-# CSharp Web API — Monolithic (net6.0)
+# CSharp Web API — Monolithic (net7.0)
 
-ASP.NET Core Web API monolithic project for **net6** branch targeting **net6.0**.
+ASP.NET Core Web API monolithic project for **net7.0** branch targeting **net7.0**.
 
 ## Project type
 
