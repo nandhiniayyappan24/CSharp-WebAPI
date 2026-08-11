@@ -31,6 +31,14 @@ dotnet build CSharpWebApi.sln
 dotnet test CSharpWebApi.sln
 ```
 
+## Tests (net45)
+
+`dotnet test` does not discover xUnit tests on .NET Framework 4.5 with modern VSTest. Use the MSBuild target instead:
+
+```bash
+dotnet msbuild tools/CSharpWebApi.Tools/CSharpWebApi.Tools.csproj -t:RunTests
+```
+
 ## Run
 
 ```bash

@@ -21,11 +21,19 @@
     <Message Importance="high" Text="[roslyn-sast] Config: tools/roslyn-sast/.globalconfig -> GlobalAnalyzerConfigFiles" />
   </Target>
 
-  <Target Name="RunCoverlet" DependsOnTargets="Build">
-    <Exec Command="dotnet test &quot;$(TestProjectPath)&quot; --no-build --collect:&quot;XPlat Code Coverage&quot;" WorkingDirectory="$(RepoRoot)" />
+  <Target Name="RunTests" DependsOnTargets="Build">
+    <PropertyGroup>
+      <XunitConsole>$([System.IO.Path]::Combine('$(NuGetPackageRoot)', 'xunit.runner.console', '2.4.2', 'tools', 'net452', 'xunit.console.exe'))</XunitConsole>
+      <TestDll>$([System.IO.Path]::Combine('$(RepoRoot)', 'tests', 'CSharpWebApi.Tests', 'bin', '$(Configuration)', 'net45', 'CSharpWebApi.Tests.dll'))</TestDll>
+    </PropertyGroup>
+    <Exec Command="&quot;$(XunitConsole)&quot; &quot;$(TestDll)&quot; -nologo" WorkingDirectory="$(RepoRoot)" />
   </Target>
 
-  <Target Name="RunAltCover" DependsOnTargets="Build">
-    <Exec Command="dotnet test &quot;$(TestProjectPath)&quot; /p:AltCover=true /p:AltCoverAssemblyExcludeFilter=&quot;xunit&quot;" WorkingDirectory="$(RepoRoot)" />
+  <Target Name="RunCoverlet" DependsOnTargets="RunTests">
+    <Message Importance="high" Text="Coverlet via dotnet test is unavailable on net45; use RunTests (xunit.runner.console) for execution." />
+  </Target>
+
+  <Target Name="RunAltCover" DependsOnTargets="RunTests">
+    <Message Importance="high" Text="AltCover via dotnet test is unavailable on net45; altcover package is referenced for tooling compatibility." />
   </Target>
 </Project>
