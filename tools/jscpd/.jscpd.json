@@ -1,0 +1,6 @@
+{
+  "path": ["../../src/CSharpWebApi/Services"],
+  "minTokens": 30,
+  "threshold": 0,
+  "reporters": ["console"]
+}
