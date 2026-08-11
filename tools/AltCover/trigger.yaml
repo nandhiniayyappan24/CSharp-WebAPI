@@ -1,0 +1,7 @@
+tool: AltCover
+language: csharp
+target_framework: "net9.0"
+project: ../../src/CSharpWebApi/CSharpWebApi.csproj
+tests: ../../tests/CSharpWebApi.Tests/CSharpWebApi.Tests.csproj
+tools_project: ../CSharpWebApi.Tools/CSharpWebApi.Tools.csproj
+command: "dotnet test ../../tests/CSharpWebApi.Tests/CSharpWebApi.Tests.csproj /p:AltCover=true /p:AltCoverAssemblyExcludeFilter=\"xunit\""

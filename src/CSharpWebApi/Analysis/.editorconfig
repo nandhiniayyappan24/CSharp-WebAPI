@@ -1,0 +1,9 @@
+# SAST fixture code is scanned by Semgrep/roslyn-sast tools; suppress compile-time blocking.
+root = false
+
+[*.cs]
+dotnet_diagnostic.CA5390.severity = none
+dotnet_diagnostic.CA3001.severity = none
+dotnet_diagnostic.CA5350.severity = none
+dotnet_diagnostic.CA5379.severity = none
+dotnet_diagnostic.CA5397.severity = none

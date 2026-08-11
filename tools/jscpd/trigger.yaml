@@ -1,0 +1,7 @@
+tool: jscpd
+language: csharp
+target_framework: "net9.0"
+project: ../../src/CSharpWebApi/CSharpWebApi.csproj
+tests: ../../tests/CSharpWebApi.Tests/CSharpWebApi.Tests.csproj
+tools_project: ../CSharpWebApi.Tools/CSharpWebApi.Tools.csproj
+config: ../jscpd/.jscpd.json
