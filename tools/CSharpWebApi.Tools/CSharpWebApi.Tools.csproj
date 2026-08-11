@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CSharpWebApi.Tools</RootNamespace>
+    <AssemblyName>CSharpWebApi.Tools</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CSharpWebApi\CSharpWebApi.csproj" />
+    <ProjectReference Include="..\..\tests\CSharpWebApi.Tests\CSharpWebApi.Tests.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\AltCover\**\*" Link="AltCover\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\Coverlet\**\*" Link="Coverlet\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\NuGet-Audit\**\*" Link="NuGet-Audit\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\OpenTelemetry\**\*" Link="OpenTelemetry\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\Roslyn\**\*" Link="Roslyn\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\Semgrep\**\*" Link="Semgrep\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\Stryker.NET\**\*" Link="Stryker.NET\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\jscpd\**\*" Link="jscpd\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\lizard\**\*" Link="lizard\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\pydriller\**\*" Link="pydriller\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\roslyn-sast\**\*" Link="roslyn-sast\%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Include="..\ToolIntegration.targets" Link="ToolIntegration.targets" />
+  </ItemGroup>
+  <Import Project="..\ToolIntegration.targets" />
+</Project>
